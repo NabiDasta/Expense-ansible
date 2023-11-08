@@ -1,0 +1,30 @@
+- name: Expense mysql setup
+  hosts: all
+  become: yes
+  tasks:
+    - name: disable mysql deafult module
+      ansible.builtin.shell: dnf module disable mysql
+    - name: copy mysql.repo file
+      ansible.builtin.copy:
+        src: mysql.repo
+        dest: /etc/yum.repos.d/mysql.repo
+    - name: Install mysql
+      ansible.builtin.dnf:
+        name: mysql-community-server
+        state: present
+    - name: start mysqld
+      ansible.builtin.systemd:
+        name: mysqld
+        state: restarted
+        enabled: yes
+    - name: mysql setup the password
+      ansible.builtin.shell: mysql_secure_installation --set-root-pass ${{ MYSQL_PASSWORD }}
+    - name: backend service start
+      ansible.builtin.service:
+        name: backend
+        state: restarted
+        enabled: yes
+        daemon-reload: yes
+
+
+
