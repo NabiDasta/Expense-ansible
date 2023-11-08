@@ -36,5 +36,9 @@
         chdir: /app
     - name: load schema
       ansible.builtin.shell: mysql -h mysql-dev.nadevops.online -uroot -p${{ MYSQL_PASSWORD }} < /app/schema/backend.sql
-
+    - name: backend service start
+      ansible.builtin.service:
+        name: backend
+        state: restarted
+        enabled: yes
 
