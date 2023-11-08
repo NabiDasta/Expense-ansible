@@ -35,6 +35,6 @@
       args:
         chdir: /app
     - name: load schema
-      ansible.builtin.shell: mysql -h mysql-dev.nadevops.online -uroot -p${{MYSQL_PASSWORD}} < /app/schema/backend.sql
+      ansible.builtin.shell: mysql -h mysql-dev.nadevops.online -uroot -p${{ MYSQL_PASSWORD }} < /app/schema/backend.sql
 
 
