@@ -4,8 +4,8 @@
   tasks:
     - name: Installing Nginx
       ansible.builtin.dnf:
-      name: nginx
-      state: present
+        name: nginx
+        state: present
     - name: copy expense config file
       ansible.builtin.copy:
         src: expense.conf
