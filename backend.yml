@@ -35,7 +35,7 @@
       args:
         chdir: /app
     - name: load schema
-      ansible.builtin.shell: mysql -h mysql-dev.nadevops.online -uroot -p{{ExpenseApp@1}} < /app/schema/backend.sql
+      ansible.builtin.shell: mysql -h mysql-dev.nadevops.online -uroot -pExpenseApp@1 < /app/schema/backend.sql
     - name: backend service start
       ansible.builtin.service:
         name: backend
