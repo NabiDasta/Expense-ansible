@@ -34,6 +34,10 @@
       ansible.builtin.shell: npm install
       args:
         chdir: /app
+    - name: install mysql
+      ansible.builtin.dnf:
+        name: install mysql
+        state: present
     - name: load schema
       ansible.builtin.shell: mysql -h mysql-dev.nadevops.online -uroot -p{{MYSQL_ROOT_PASSWORD}} < /app/schema/backend.sql
     - name: backend service start
