@@ -1,4 +1,3 @@
-tasks:
   - name: Installing Nginx
     ansible.builtin.dnf:
       name: nginx
@@ -15,7 +14,6 @@ tasks:
     ansible.builtin.file:
       path: /usr/share/nginx/html
       state: directory
-
   - name: dowanload and exract the file
     ansible.builtin.unarchive:
       src: https://expense-artifacts.s3.amazonaws.com/frontend.zip
