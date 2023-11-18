@@ -1,5 +1,5 @@
 - name: copy rsyslog file
-  ansbile.builtin.template:
+  ansible.builtin.template:
     src: rsyslog.conf
     dest: /etc/rsyslog.d/{{component}}.conf
   when: is_rsyslog_config
