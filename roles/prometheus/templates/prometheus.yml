@@ -27,3 +27,6 @@ scrape_configs:
 
     static_configs:
       - targets: ["localhost:9090"]
+  - job_name: ecs_nodes
+    static_configs:
+      - targets: ["172.31.33.234:9090"]
