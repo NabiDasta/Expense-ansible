@@ -95,7 +95,9 @@
           "editorMode": "code",
           "expr": "up{tag=\"frontend-dev\"}",
           "instant": false,
+        {% raw %}
           "legendFormat": "{{job}}",
+        {% endraw %}
           "range": true,
           "refId": "A"
         }
