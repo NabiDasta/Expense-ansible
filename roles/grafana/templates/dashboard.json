@@ -192,7 +192,9 @@
           "editorMode": "code",
           "expr": "(node_memory_MemFree_bytes{tag=\"frontend-dev\"} + node_memory_Cached_bytes{tag=\"frontend-dev\"} + node_memory_Buffers_bytes{tag=\"frontend-dev\"}) / node_memory_MemTotal_bytes{tag=\"frontend-dev\"} * 100",
           "instant": false,
+        {% raw %}
           "legendFormat": "{{tag}}",
+        {% endraw %}
           "range": true,
           "refId": "A"
         }
