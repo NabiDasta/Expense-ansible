@@ -8,7 +8,7 @@ receivers:
   - name: SNS
     sns_configs:
     - sigv4:
-        region: us-est-1
+        region: us-east-1
       topic_arn: arn:aws:sns:us-east-1:146677740583:email1
       subject: prometheus alert
 inhibit_rules:
