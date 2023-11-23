@@ -21,7 +21,7 @@
 
 - name: Restart the alertmanager
   ansible.builtin.systemd:
-    name: alertmanager.yml
+    name: alertmanager
     state: restarted
     enabled: yes
 
