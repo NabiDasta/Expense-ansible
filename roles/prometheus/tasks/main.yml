@@ -5,25 +5,21 @@
 
 - name: copy alert rules
   ansible.builtin.template:
-    src: alert-rules.yml
-    dest: /opt/prometheus/alert-rules.yml
+    src: common.yml
+    dest: /opt/prometheus/alert-rules/common.yml
 
-- name: restart the prometheus
-  ansible.builtin.systemd:
-    name: prometheus
-    state: restarted
-    enabled: yes
+- name: reload the prometheus
+  ansible.builtin.shell: kill -1 $(ps -ef | grep /opt/prometheus/prometheus | grep -v grep | awk '{print $2}')
+
 
 - name: copy the alert manager config
   ansible.builtin.template:
     src: alertmanager.yml
     dest: /opt/alertmanager/alertmanager.yml
 
-- name: Restart the alertmanager
-  ansible.builtin.systemd:
-    name: alertmanager
-    state: restarted
-    enabled: yes
+- name: Reload the alertmanager
+  ansible.builtin.shell: kill -1 $(ps -ef | grep /opt/alertmanager/alertmanager | grep -v grep | awk '{print $2}')
+
 
 
 
