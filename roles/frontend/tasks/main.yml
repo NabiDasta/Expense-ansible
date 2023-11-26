@@ -42,7 +42,7 @@
       dest: /tmp/{{component}}-{{env}}.yml
 
   - name: Upload the file to s3 bucket
-    amazon.aws.s3_object:
+    community.aws.s3_sync:
       bucket: nabi-prometheus-alert-rules
       file_root: /tmp/{{component}}-{{env}}.yml
 
