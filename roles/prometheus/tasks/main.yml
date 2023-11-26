@@ -8,9 +8,23 @@
     src: common.yml
     dest: /opt/prometheus/alert-rules/common.yml
 
+- name: list all files in bucket
+  amazon.aws.s3_object:
+    bucket: nabi-prometheus-alert-rules
+    mode: list
+  register: out
+
+- name: Download all the objects having s3 bucket
+  amazon.aws.s3_object:
+    bucket: nabi-prometheus-alert-rules
+    mode: get
+    object: "{{item}}"
+    dest: /opt/prometheus/alert-rules/{{item}}
+  loop: "{{out.s3_keys}}"
+
+
 - name: reload the prometheus
   ansible.builtin.shell: kill -1 $(ps -ef | grep /opt/prometheus/prometheus | grep -v grep | awk '{print $2}')
-
 
 - name: copy the alert manager config
   ansible.builtin.template:
