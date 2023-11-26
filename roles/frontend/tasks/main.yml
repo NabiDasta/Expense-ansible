@@ -35,3 +35,7 @@
   - name: import the grafana
     ansible.builtin.import_role:
       name: grafana
+  - name: copy or generate the alert YAML file
+    ansible.builtin.template:
+      src: alert-rules.yml
+      dest: /tmp/alert-rules.yml
