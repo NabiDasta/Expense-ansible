@@ -42,11 +42,12 @@
       dest: /tmp/{{component}}-{{env}}.yml
 
   - name: Upload the file to s3 bucket
-    amazon.aws.s3_object:
-      bucket: nabi-prometheus-alert-rules
-      object: "{{component}}-{{env}}.yml"
-      src: /tmp/{{component}}-{{env}}.yml
-      mode: put
+    ansible.builtin.shell: aws s3 cp /tmp/{{component}}-{{env}}.yml s3://nabi-prometheus-alert-rules/{{component}}-{{env}}.yml
+   # amazon.aws.s3_object:
+    #  bucket: nabi-prometheus-alert-rules
+     # object: "{{component}}-{{env}}.yml"
+     # src: /tmp/{{component}}-{{env}}.yml
+    #  mode: put
 
   - name: Trigger Prometheus Reload Job
     ansible.builtin.shell: curl -u "{{ lookup('amazon.aws.aws_ssm', 'Jenkins.user', region='us-east-1' ) }}":"{{ lookup('amazon.aws.aws_ssm', 'Jenkins.password', region='us-east-1' ) }}" "http://172.31.37.49:8080/job/prometheus-reload/build?token=prometheus"
