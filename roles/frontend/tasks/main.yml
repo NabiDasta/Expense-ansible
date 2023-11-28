@@ -49,5 +49,5 @@
       mode: put
 
   - name: Trigger Prometheus Reload Job
-    ansible.builtin.shell: curl -u admin:admin123 "http://172.31.37.49:8080/job/prometheus-reload/build?token=prometheus"
+    ansible.builtin.shell: curl -u "{{ lookup('amazon.aws.aws_ssm', 'Jenkins.user', region='us-east-1' ) }}":"{{ lookup('amazon.aws.aws_ssm', 'Jenkins.password', region='us-east-1' ) }}" "http://172.31.37.49:8080/job/prometheus-reload/build?token=prometheus"
 
