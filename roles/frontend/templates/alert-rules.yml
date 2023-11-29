@@ -37,4 +37,14 @@ groups:
         env: {{ env }}
       annotations:
         summary: warning | CPU Usage Alert
+    - alert: NetworkBwMonitorwaitqueue
+      expr: rate(node_ethtool_bw_in_allowance_exceedde[1m]) > 0
+      for: 3m
+      labels:
+        severity: critical
+        component: {{ component }}
+        env: {{ env }}
+        annotations:
+          summary: critical | NetWork wait Queue High
+
 
