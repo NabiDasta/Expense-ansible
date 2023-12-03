@@ -25,11 +25,11 @@ scrape_configs:
   - job_name: ec2_nodes
     relabel_configs:
       - source_labels: [__meta_ec2_instance_id]
-        target_label: instance
+        target_label: instance_id
       - source_labels: [__meta_ec2_private_ip]
-        target_label: Private
+        target_label: Private_ip
       - source_labels: [__meta_ec2_tag_Name]
-        target_label: tag
+        target_label: Name
     ec2_sd_configs:
       - region: us-east-1
         port: 9100
