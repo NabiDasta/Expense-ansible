@@ -40,13 +40,19 @@
   - name: load schema
     ansible.builtin.shell: mysql -h {{ lookup('amazon.aws.aws_ssm', '{{env}}.rds.endpoint', region='us-east-1' ) }} -u{{ lookup('amazon.aws.aws_ssm', '{{env}}.rds.username', region='us-east-1' ) }} -p{{ lookup('amazon.aws.aws_ssm', '{{env}}.rds.password', region='us-east-1' ) }} < /app/schema/backend.sql
 
-  - name: backend service start
-    ansible.builtin.service:
-      name: backend
-      state: restarted
-      enabled: yes
-
-  - name: import the elk filebeat file
+  - name: Import ELK Role - Filebeat
     ansible.builtin.import_role:
       name: elk
       tasks_from: filebeat
+
+  - name: Start Backend Service
+    ansible.builtin.systemd:
+      name: backend
+      state: restarted
+      enabled: yes
+      daemon-reload: yes
+
+  - name: Import Prometheus - Node Exporter
+    ansible.builtin.import_role:
+      name: prometheus
+      tasks_from: node-exporter
